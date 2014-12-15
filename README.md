@@ -1,4 +1,9 @@
-# how to set up
+basecamp_to_slack
+========================================
+
+Get todo from Basecamp and then say it to Slack.
+
+# How to setup
 
 ```
 $ bundle
