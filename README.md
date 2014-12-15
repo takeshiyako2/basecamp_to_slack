@@ -10,3 +10,10 @@ $ bundle
 $ contab -e
 */5 * * * * ruby basecamp_to_skack.rb >> basecamp_to_skack.log
 ```
+
+
+# License
+
+Streem is distributed under MIT license.
+
+Takeshi Yako
