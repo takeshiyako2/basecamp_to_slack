@@ -42,7 +42,7 @@ logan = Logan::Client.new(@basecamp_ID, @auth_hash, @user_agent)
 basecamp_projects = logan.projects
 
 # datetime for check interval
-datetime_interval = (Time.now - 60 * @check_interval_min).strftime("%Y%m%d%H%M%S") # 20141203190204
+datetime_interval = (Time.now - 60 * @check_interval_min).strftime("%Y%m%d%H%M%S")
 
 # projects loop
 basecamp_projects.each do |project|
