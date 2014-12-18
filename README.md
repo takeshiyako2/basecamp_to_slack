@@ -26,7 +26,7 @@ Set basecamp and Slack Webhook URL.
 Set cron.
 ```
 $ crontab -e
-*/5 * * * * ruby basecamp_to_skack.rb >> basecamp_to_skack.log
+*/5 * * * * ruby basecamp_to_slack.rb >> basecamp_to_slack.log
 ```
 
 
