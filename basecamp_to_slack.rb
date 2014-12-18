@@ -27,7 +27,7 @@ end
 # print to Slack
 def put_slack(text)
   puts text
-  `curl -X POST --data-urlencode 'payload={
+  ref = `curl -X POST --data-urlencode 'payload={
     "channel": "#notification", 
     "icon_emoji": ":ocean:",
     "mrkdwn": true, 
@@ -35,6 +35,7 @@ def put_slack(text)
     "type": "message", 
     "username": "basecamp"
 }' #{@slack_webhook_url}`
+  puts ref
 end
 
 # client for basecamp
@@ -78,7 +79,15 @@ basecamp_projects.each do |project|
           # is new comment?
           if comment_updated_datetime.strftime("%Y%m%d%H%M%S") > datetime_interval
             # updated comment!!
-            put_slack("[#{project.name} #{todolist.name}] #{comment["creator"]["name"]} updated #{todo["content"]} to #{comment["content"]} #{todo["app_url"]}")
+            content = comment["content"]
+            content = content.gsub(/"/, "").gsub(/<\/?[^>]*>/, "")
+            max_size = 300
+            if content.size >= max_size
+              content = content.each_char.each_slice(300).map(&:join)[0]
+              content = content + ' ...'
+            end
+            content = "```#{content}```"
+            put_slack("[#{project.name} #{todolist.name}] #{comment["creator"]["name"]} updated #{todo["content"]} #{content} #{todo["app_url"]}")
           end
         end
       end
