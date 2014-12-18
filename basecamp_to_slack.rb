@@ -86,8 +86,7 @@ basecamp_projects.each do |project|
               content = content.each_char.each_slice(300).map(&:join)[0]
               content = content + ' ...'
             end
-            content = "```#{content}```"
-            put_slack("[#{project.name} #{todolist.name}] #{comment["creator"]["name"]} updated #{todo["content"]} #{content} #{todo["app_url"]}")
+            put_slack("[#{project.name} #{todolist.name}] #{comment["creator"]["name"]} updated #{todo["content"]} -> #{content} #{todo["app_url"]}")
           end
         end
       end
