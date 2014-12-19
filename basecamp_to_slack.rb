@@ -80,11 +80,13 @@ basecamp_projects.each do |project|
           if comment_updated_datetime.strftime("%Y%m%d%H%M%S") > datetime_interval
             # updated comment!!
             content = comment["content"]
-            content = content.gsub(/"/, "").gsub(/<\/?[^>]*>/, "")
-            max_size = 300
-            if content.size >= max_size
-              content = content.each_char.each_slice(300).map(&:join)[0]
-              content = content + ' ...'
+            if content != nil
+              content = content.gsub(/"/, "").gsub(/<\/?[^>]*>/, "")
+              max_size = 300
+              if content.size >= max_size
+                content = content.each_char.each_slice(300).map(&:join)[0]
+                content = content + ' ...'
+              end
             end
             put_slack("[#{project.name} #{todolist.name}] #{comment["creator"]["name"]} updated #{todo["content"]} -> #{content} #{todo["app_url"]}")
           end
