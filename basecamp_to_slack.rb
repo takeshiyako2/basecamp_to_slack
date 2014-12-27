@@ -81,10 +81,10 @@ basecamp_projects.each do |project|
             # updated comment!!
             content = comment["content"]
             if content != nil
-              content = content.gsub(/"/, "").gsub(/<\/?[^>]*>/, " ")
+              content = content.gsub(/"/, "").gsub(/<\/?[^>]*>/, " ").gsub(/\r\n/, " ")
               max_size = 300
               if content.size >= max_size
-                content = content.each_char.each_slice(300).map(&:join)[0]
+                content = content.each_char.each_slice(max_size).map(&:join)[0]
                 content = content + ' ...'
               end
             end
